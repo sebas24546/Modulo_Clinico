@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Bioquímica Clínica - QUIROVIDA</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <style>
+    body { font-family: 'Segoe UI', sans-serif; background: #f9f9f9; padding: 40px; color: #333; }
+    header { text-align: center; margin-bottom: 20px; }
+    header h1 { font-size: 24px; margin: 0; text-transform: uppercase; }
+    header h2 { font-size: 18px; margin: 0; color: #666; }
+    .datos-paciente { margin-bottom: 30px; font-size: 15px; }
+    .datos-paciente input { border: none; border-bottom: 1px solid #aaa; background: transparent; padding: 2px 6px; margin-left: 6px; }
+    .section-title { font-size: 18px; font-weight: bold; text-transform: uppercase; margin: 25px 0 10px; border-bottom: 2px solid #ccc; padding-bottom: 5px; }
+    table { width: 100%; border-collapse: collapse; margin-bottom: 30px; }
+    th, td { border: 1px solid #ccc; padding: 6px; font-size: 14px; vertical-align: top; }
+    th { background-color: #e9ecef; text-align: left; }
+    td input { width: 100%; border: none; background: transparent; font-size: 14px; }
+    #descargar { background-color: #007bff; color: white; padding: 10px 20px; font-size: 15px; border: none; border-radius: 5px; cursor: pointer; }
+    #descargar:hover { background-color: #0056b3; }
+  </style>
+</head>
+<body>
+
+<div id="contenidoPDF">
+
+  <header>
+    <h1>Laboratorio Clínico QUIROVIDA</h1>
+    <h2>Tarija - Bolivia</h2>
+  </header>
+
+  <div class="datos-paciente">
+    <strong>Paciente N°:</strong> <input value="001"> |
+    <strong>Nombre:</strong> <input value=""> |
+    <strong>Sexo:</strong> <input value=""> |
+    <strong>Edad:</strong> <input value=""> |
+    <strong>Médico solicitante:</strong> <input value=""> |
+    <strong>Fecha:</strong> <input type="date">
+  </div>
+
+  <div class="section-title">Bioquímica Clínica</div>
+
+  <div class="section-title">Metabolismo de Glúcidos y Proteínas</div>
+  <table>
+    <tr><th>RESULTADOS</th><th>UNIDADES</th><th>RANGOS NORMALES</th></tr>
+    <tr><td>Glucosa <input></td><td><input value="mg/dl"></td><td><input value="70 – 100"></td></tr>
+    <tr><td>Urea <input></td><td><input value="mg/dl"></td><td><input value="17 – 43"></td></tr>
+    <tr><td>Creatinina <input></td><td><input value="mg/dl"></td><td><input value="0.50 – 1.00"></td></tr>
+    <tr><td>Ácido Úrico <input></td><td><input value="mg/dl"></td><td><input value="2.40 – 5.70"></td></tr>
+  </table>
+
+  <div class="section-title">Perfil Lipídico</div>
+  <table>
+    <tr><th>RESULTADOS</th><th>UNIDADES</th><th>RANGOS NORMALES</th></tr>
+    <tr><td>Colesterol Total <input></td><td><input value="mg/dl"></td><td><input value="0 – 190"></td></tr>
+    <tr><td>Triglicéridos <input></td><td><input value="mg/dl"></td><td><input value="0 – 200"></td></tr>
+  </table>
+
+  <div class="section-title">Proteínas y Enzimas Hepáticas</div>
+  <table>
+    <tr><th>RESULTADOS</th><th>UNIDADES</th><th>RANGOS NORMALES</th></tr>
+    <tr><td>Albúmina <input></td><td><input value="g/dl"></td><td><input value="3.5 – 5.2"></td></tr>
+    <tr><td>Proteínas Totales <input></td><td><input value="g/dl"></td><td><input value="6.6 – 8.8"></td></tr>
+    <tr><td>F. Alcalina <input></td><td><input value="U/L"></td><td><input value="Adultos: 27 – 105 / Niños: 75 – 390"></td></tr>
+    <tr><td>GOT (AST) <input></td><td><input value="U/L"></td><td><input value="H: 11 – 39 / M: 10 – 37"></td></tr>
+    <tr><td>GPT (ALT) <input></td><td><input value="U/L"></td><td><input value="H: 11 – 45 / M: 10 – 37"></td></tr>
+    <tr><td>GGT <input></td><td><input value="U/L"></td><td><input value="H: 7 – 58 / M: 5 – 39"></td></tr>
+  </table>
+
+  <div class="section-title">Bilirrubinas</div>
+  <table>
+    <tr><th>RESULTADOS</th><th>UNIDADES</th><th>RANGOS NORMALES</th></tr>
+    <tr><td>Bilirrubina Total <input></td><td><input value="mg/dl"></td><td><input value="0.10 – 1.20"></td></tr>
+    <tr><td>Bilirrubina Directa <input></td><td><input value="mg/dl"></td><td><input value="0.00 – 0.20"></td></tr>
+    <tr><td>Bilirrubina Indirecta <input></td><td><input value="mg/dl"></td><td><input value="0.20 – 1.10"></td></tr>
+  </table>
+
+</div>
+
+<button id="descargar">📄 Descargar en PDF</button>
+
+<script>
+document.getElementById("descargar").addEventListener("click", function () {
+  const contenido = document.getElementById("contenidoPDF");
+  html2pdf().set({
+    margin: 0.5,
+    filename: 'Bioquimica_QUIROVIDA.pdf',
+    image: { type: 'jpeg', quality: 0.98 },
+    html2canvas: {
+      scale: 2,
+      scrollY: 0,
+      useCORS: true
+    },
+    jsPDF: {
+      unit: 'in',
+      format: 'a4',
+      orientation: 'portrait'
+    }
+  }).from(contenido).save();
+});
+</script>
+
+</body>
+</html>

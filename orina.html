@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Examen General de Orina - QUIROVIDA</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <style>
+    body { font-family: 'Segoe UI', sans-serif; background: #f9f9f9; padding: 40px; color: #333; }
+    header { text-align: center; margin-bottom: 20px; }
+    header h1 { font-size: 24px; margin: 0; text-transform: uppercase; }
+    header h2 { font-size: 18px; margin: 0; color: #666; }
+    .datos-paciente { margin-bottom: 30px; font-size: 15px; }
+    .datos-paciente input { border: none; border-bottom: 1px solid #aaa; background: transparent; padding: 2px 6px; margin-left: 6px; }
+    .section-title { font-size: 18px; font-weight: bold; text-transform: uppercase; margin: 30px 0 10px; border-bottom: 2px solid #ccc; padding-bottom: 5px; }
+    table { width: 100%; border-collapse: collapse; margin-bottom: 40px; }
+    th, td { border: 1px solid #ccc; padding: 6px; font-size: 14px; vertical-align: top; }
+    th { background-color: #e9ecef; text-align: left; }
+    td input { width: 100%; border: none; background: transparent; font-size: 14px; }
+    #descargar { background-color: #007bff; color: white; padding: 10px 20px; font-size: 15px; border: none; border-radius: 5px; cursor: pointer; }
+    #descargar:hover { background-color: #0056b3; }
+  </style>
+</head>
+<body>
+
+<div id="contenidoPDF">
+
+  <header>
+    <h1>Laboratorio Clínico QUIROVIDA</h1>
+    <h2>Tarija - Bolivia</h2>
+  </header>
+
+  <div class="datos-paciente">
+    <strong>Paciente N°:</strong> <input value="001"> |
+    <strong>Nombre:</strong> <input value=""> |
+    <strong>Sexo:</strong> <input value=""> |
+    <strong>Edad:</strong> <input value=""> |
+    <strong>Médico solicitante:</strong> <input value=""> |
+    <strong>Fecha:</strong> <input type="date">
+  </div>
+
+  <div class="section-title">Examen Físico</div>
+  <table>
+    <tr><th>RESULTADOS</th><th>UNIDADES</th><th>RANGOS NORMALES</th></tr>
+    <tr><td>Volumen <input></td><td><input value=""></td><td><input value=""></td></tr>
+    <tr><td>Olor <input></td><td><input value=""></td><td><input value=""></td></tr>
+    <tr><td>Aspecto <input></td><td><input value=""></td><td><input value=""></td></tr>
+    <tr><td>Color <input></td><td><input value=""></td><td><input value=""></td></tr>
+  </table>
+
+  <div class="section-title">Examen Químico</div>
+  <table>
+    <tr><th>RESULTADOS</th><th>UNIDADES</th><th>RANGOS NORMALES</th></tr>
+    <tr><td>Densidad <input></td><td><input value="g/ml"></td><td><input value="1.010 - 1.030"></td></tr>
+    <tr><td>pH <input></td><td><input value=""></td><td><input value="5.0 - 7.0"></td></tr>
+    <tr><td>Proteínas <input></td><td><input value="mg/dl"></td><td><input value="No contiene"></td></tr>
+    <tr><td>Glucosa <input></td><td><input value="mg/dl"></td><td><input value="No contiene"></td></tr>
+    <tr><td>Cetonas <input></td><td><input value="mg/dl"></td><td><input value="No contiene"></td></tr>
+    <tr><td>Bilirrubinas <input></td><td><input value="mg/dl"></td><td><input value="No contiene"></td></tr>
+    <tr><td>Sangre <input></td><td><input value="mg/dl"></td><td><input value="No contiene"></td></tr>
+    <tr><td>Urobilinógeno <input></td><td><input value=""></td><td><input value="No contiene"></td></tr>
+    <tr><td>Nitritos <input></td><td><input value=""></td><td><input value="Negativo"></td></tr>
+  </table>
+
+  <div class="section-title">Examen Microscópico</div>
+  <table>
+    <tr><th>RESULTADOS</th><th>UNIDADES</th><th>RANGOS NORMALES</th></tr>
+    <tr><td>Células epiteliales <input></td><td><input value=""></td><td><input value="Escasas"></td></tr>
+    <tr><td>Leucocitos <input></td><td><input value="pcm"></td><td><input value="0 - 5"></td></tr>
+    <tr><td>Eritrocitos <input></td><td><input value="pcm"></td><td><input value="0 - 1"></td></tr>
+    <tr><td>Bacterias <input></td><td><input value=""></td><td><input value="Escasas"></td></tr>
+    <tr><td>Levaduras <input></td><td><input value=""></td><td><input value="No se observan"></td></tr>
+    <tr><td>Cristales <input></td><td><input value=""></td><td><input value="No se observan"></td></tr>
+    <tr><td>Cilindros <input></td><td><input value=""></td><td><input value="No se observan"></td></tr>
+    <tr><td>Otros <input></td><td><input value=""></td><td><input value=""></td></tr>
+  </table>
+
+</div>
+
+<button id="descargar">📄 Descargar en PDF</button>
+
+<script>
+document.getElementById("descargar").addEventListener("click", function () {
+  const contenido = document.getElementById("contenidoPDF");
+  html2pdf().set({
+    margin: 0.5,
+    filename: 'Orina_QUIROVIDA.pdf',
+    image: { type: 'jpeg', quality: 0.98 },
+    html2canvas: {
+      scale: 2,
+      scrollY: 0,
+      useCORS: true
+    },
+    jsPDF: {
+      unit: 'in',
+      format: 'a4',
+      orientation: 'portrait'
+    }
+  }).from(contenido).save();
+});
+</script>
+
+</body>
+</html>

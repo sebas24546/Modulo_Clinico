@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Hemograma - QUIROVIDA</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <style>
+    body { font-family: 'Segoe UI', sans-serif; background: #f9f9f9; padding: 40px; color: #333; }
+    header { text-align: center; margin-bottom: 20px; }
+    header h1 { font-size: 24px; margin: 0; text-transform: uppercase; }
+    header h2 { font-size: 18px; margin: 0; color: #666; }
+    .datos-paciente { margin-bottom: 30px; font-size: 15px; }
+    .datos-paciente input { border: none; border-bottom: 1px solid #aaa; background: transparent; padding: 2px 6px; margin-left: 6px; }
+    .section-title { font-size: 18px; font-weight: bold; text-transform: uppercase; margin: 25px 0 10px; border-bottom: 2px solid #ccc; padding-bottom: 5px; }
+    table { width: 100%; border-collapse: collapse; margin-bottom: 30px; }
+    th, td { border: 1px solid #ccc; padding: 6px; font-size: 14px; vertical-align: top; }
+    th { background-color: #e9ecef; text-align: left; }
+    td input { width: 100%; border: none; background: transparent; font-size: 14px; }
+    #descargar { background-color: #007bff; color: white; padding: 10px 20px; font-size: 15px; border: none; border-radius: 5px; cursor: pointer; }
+    #descargar:hover { background-color: #0056b3; }
+  </style>
+</head>
+<body>
+
+<div id="contenidoPDF">
+
+  <header>
+    <h1>Laboratorio Clínico QUIROVIDA</h1>
+    <h2>Tarija - Bolivia</h2>
+  </header>
+
+  <div class="datos-paciente">
+    <strong>Paciente N°:</strong> <input value="001"> |
+    <strong>Nombre:</strong> <input value=""> |
+    <strong>Sexo:</strong> <input value=""> |
+    <strong>Edad:</strong> <input value=""> |
+    <strong>Médico solicitante:</strong> <input value=""> |
+    <strong>Fecha:</strong> <input type="date">
+  </div>
+
+  <div class="section-title">Hemograma</div>
+
+  <div class="section-title">Serie Roja</div>
+  <table>
+    <tr><th>RESULTADOS</th><th>UNIDADES</th><th>RANGOS NORMALES</th></tr>
+    <tr><td>Hematíes <input></td><td><input value="mm&sup3;"></td><td><input value="H: 4.5–6.5 / M: 3.8–5.8 / N: 4.1–5.5"></td></tr>
+    <tr><td>Hemoglobina <input></td><td><input value="g/dl"></td><td><input value="11.5 – 16.1"></td></tr>
+    <tr><td>Hematocrito <input></td><td><input value="%"></td><td><input value="37 – 47"></td></tr>
+    <tr><td>VCM <input></td><td><input value="fl"></td><td><input value="75 – 97"></td></tr>
+    <tr><td>HCM <input></td><td><input value="pg"></td><td><input value="26 – 33"></td></tr>
+    <tr><td>CCMH <input></td><td><input value="g/dl"></td><td><input value="32 – 36"></td></tr>
+  </table>
+
+  <div class="section-title">Serie Blanca</div>
+  <table>
+    <tr><th>RESULTADOS</th><th>UNIDADES</th><th>RANGOS NORMALES</th></tr>
+    <tr><td>Leucocitos <input></td><td><input value="mm&sup3;"></td><td><input value="4.00 – 10.00"></td></tr>
+    <tr><td>Neutrófilos <input></td><td><input value="%"></td><td><input value="55 – 65"></td></tr>
+    <tr><td>Linfocitos <input></td><td><input value="%"></td><td><input value="25 – 35"></td></tr>
+    <tr><td>Monocitos <input></td><td><input value="%"></td><td><input value="4 – 8"></td></tr>
+    <tr><td>Eosinófilos <input></td><td><input value="%"></td><td><input value="1 – 2"></td></tr>
+    <tr><td>Basófilos <input></td><td><input value="%"></td><td><input value="0 – 1"></td></tr>
+  </table>
+
+  <div class="section-title">Plaquetas, VSG y Grupo</div>
+  <table>
+    <tr><th>RESULTADOS</th><th>UNIDADES</th><th>RANGOS NORMALES</th></tr>
+    <tr><td>Plaquetas <input></td><td><input value="mm&sup3;"></td><td><input value="150 – 400 x10³"></td></tr>
+    <tr><td>VSG <input></td><td><input value="mm/h"></td><td><input value="H: 0–7 / M: 0–20"></td></tr>
+    <tr><td>Grupo y Factor <input></td><td><input></td><td><input></td></tr>
+  </table>
+
+</div>
+
+<button id="descargar">📄 Descargar en PDF</button>
+
+<script>
+document.getElementById("descargar").addEventListener("click", function () {
+  const contenido = document.getElementById("contenidoPDF");
+  html2pdf().set({
+    margin: 0.5,
+    filename: 'Hemograma_QUIROVIDA.pdf',
+    image: { type: 'jpeg', quality: 0.98 },
+    html2canvas: {
+      scale: 2,
+      scrollY: 0,
+      useCORS: true
+    },
+    jsPDF: {
+      unit: 'in',
+      format: 'a4',
+      orientation: 'portrait'
+    }
+  }).from(contenido).save();
+});
+</script>
+
+</body>
+</html>

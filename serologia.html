@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Serología - QUIROVIDA</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <style>
+    body { font-family: 'Segoe UI', sans-serif; background: #f9f9f9; padding: 40px; color: #333; }
+    header { text-align: center; margin-bottom: 20px; }
+    header h1 { font-size: 24px; margin: 0; text-transform: uppercase; }
+    header h2 { font-size: 18px; margin: 0; color: #666; }
+    .datos-paciente { margin-bottom: 30px; font-size: 15px; }
+    .datos-paciente input { border: none; border-bottom: 1px solid #aaa; background: transparent; padding: 2px 6px; margin-left: 6px; }
+    .section-title { font-size: 18px; font-weight: bold; text-transform: uppercase; margin: 25px 0 10px; border-bottom: 2px solid #ccc; padding-bottom: 5px; }
+    table { width: 100%; border-collapse: collapse; margin-bottom: 30px; }
+    th, td { border: 1px solid #ccc; padding: 6px; font-size: 14px; vertical-align: top; }
+    th { background-color: #e9ecef; text-align: left; }
+    td input { width: 100%; border: none; background: transparent; font-size: 14px; }
+    #descargar { background-color: #007bff; color: white; padding: 10px 20px; font-size: 15px; border: none; border-radius: 5px; cursor: pointer; }
+    #descargar:hover { background-color: #0056b3; }
+  </style>
+</head>
+<body>
+
+<div id="contenidoPDF">
+
+  <header>
+    <h1>Laboratorio Clínico QUIROVIDA</h1>
+    <h2>Tarija - Bolivia</h2>
+  </header>
+
+  <div class="datos-paciente">
+    <strong>Paciente N°:</strong> <input value="001"> |
+    <strong>Nombre:</strong> <input value=""> |
+    <strong>Sexo:</strong> <input value=""> |
+    <strong>Edad:</strong> <input value=""> |
+    <strong>Médico solicitante:</strong> <input value=""> |
+    <strong>Fecha:</strong> <input type="date">
+  </div>
+
+  <div class="section-title">Serología</div>
+  <table>
+    <tr><th>RESULTADOS</th><th>UNIDADES</th><th>RANGOS NORMALES</th></tr>
+    <tr><td>PCR <input></td><td><input></td><td><input></td></tr>
+    <tr><td>Factor Reumatoideo <input></td><td><input></td><td><input></td></tr>
+    <tr><td>ASTO <input></td><td><input></td><td><input></td></tr>
+    <tr><td>Reacción de Widal <input></td><td><input></td><td><input></td></tr>
+    <tr><td>HAI Chagas <input></td><td><input></td><td><input value=">1/16 = Reactivo"></td></tr>
+    <tr><td>HAI Toxoplasmosis <input></td><td><input></td><td><input value=">1/16 = Reactivo"></td></tr>
+    <tr><td>VIH <input></td><td><input></td><td><input value="No Reactivo"></td></tr>
+    <tr><td>RPR <input></td><td><input></td><td><input value="No Reactivo"></td></tr>
+    <tr><td>Hepatitis A <input></td><td><input></td><td><input value="No Reactivo"></td></tr>
+    <tr><td>Hepatitis B <input></td><td><input></td><td><input value="No Reactivo"></td></tr>
+    <tr><td>Hepatitis C <input></td><td><input></td><td><input value="No Reactivo"></td></tr>
+    <tr><td>Test de Embarazo <input></td><td><input></td><td><input value="Negativo"></td></tr>
+  </table>
+
+</div>
+
+<button id="descargar">📄 Descargar en PDF</button>
+
+<script>
+document.getElementById("descargar").addEventListener("click", function () {
+  const contenido = document.getElementById("contenidoPDF");
+  html2pdf().set({
+    margin: 0.5,
+    filename: 'Serologia_QUIROVIDA.pdf',
+    image: { type: 'jpeg', quality: 0.98 },
+    html2canvas: {
+      scale: 2,
+      scrollY: 0,
+      useCORS: true
+    },
+    jsPDF: {
+      unit: 'in',
+      format: 'a4',
+      orientation: 'portrait'
+    }
+  }).from(contenido).save();
+});
+</script>
+
+</body>
+</html>
